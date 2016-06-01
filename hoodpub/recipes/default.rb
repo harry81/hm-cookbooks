@@ -23,6 +23,8 @@ package "libncurses-dev"
 package "libpq-dev"
 package "python-imaging"
 
+include_recipe "database::postgresql"
+
 user node.hoodpub.deploy do
   comment 'hoodpub user'
   home node.hoodpub.deploy_path
@@ -71,3 +73,29 @@ end
 
 
 ENV['HOME'] = node.hoodpub.deploy_path
+
+postgresql_connection_info = {
+  :host     => '127.0.0.1',
+  :port     => node['postgresql']['config']['port'],
+  :username => 'postgres',
+  :password => node['postgresql']['password']['postgres']
+}
+
+# Create a postgresql user but grant no privileges
+postgresql_database_user 'hoodpub' do
+  connection postgresql_connection_info
+  password   'hoodpub81'
+  action     :create
+end
+
+
+# create a postgresql database with additional parameters
+postgresql_database 'hoodpub' do
+  connection postgresql_connection_info
+  template 'DEFAULT'
+  encoding 'DEFAULT'
+  tablespace 'DEFAULT'
+  connection_limit '-1'
+  owner 'hoodpub'
+  action :create
+end
