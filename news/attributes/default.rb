@@ -1,0 +1,5 @@
+default["news"]["deploy"] = "deploy"
+default["news"]["deploy_path"] = "/home/#{node.news.deploy}"
+default["news"]["src_path"] = "#{node.news.deploy_path}/src"
+default["news"]["src_git_url"]="https://github.com/harry81/news.git"
+default["news"]["java_home"]="/usr/lib/jvm/java-7-openjdk-amd64"

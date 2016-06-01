@@ -6,13 +6,13 @@ pushd /tmp
 rm -rf /tmp/cookbooks-temp
 
 mkdir /tmp/cookbooks-temp
-cd /tmp/temp
+cd /tmp/cookbooks-temp
 tar -xzf  /tmp/cookbooks-temp.tar.gz
 rm  /tmp/cookbooks-temp.tar.gz
-cd cookbooks
 
 echo 'Creating tar file.'
-tar -czf  ../hm-cookbooks.tar.gz *
+cd cookbooks
+tar -czf  ../../hm-cookbooks.tar.gz *
 cd ..
 rm -rf cookbooks
 

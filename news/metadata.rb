@@ -1,0 +1,7 @@
+name 'news'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures news'
+long_description 'Installs/Configures news'
+version '0.1.0'

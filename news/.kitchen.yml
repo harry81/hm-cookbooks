@@ -1,0 +1,39 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+  require_chef_omnibus: 12.7.2
+
+
+driver:
+  name: ec2
+  aws_ssh_key_id: id_rsa
+  region: eu-west-1
+  availability_zone: a
+  subnet_id: subnet-946f99e2
+  instance_type: t2.small
+  image_id: ami-f95ef58a
+  security_group_ids: ['sg-36b74051', 'sg-fdb5429a', 'sg-bbb945dc']
+  retryable_tries: 120
+
+# provisioner:
+#   name: chef_zero_scheduled_task
+
+provisioner:
+  name: chef_solo
+  require_chef_omnibus: 12.7.2
+
+transport:
+  ssh_key: ~/.ssh/id_rsa
+
+platforms:
+  - name: ec2-ubuntu-14.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[news::default]
+      - recipe[news::deploy]
+    attributes:

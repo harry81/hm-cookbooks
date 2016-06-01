@@ -1,9 +1,16 @@
 DEPENDENCIES
-  hmnews
-    path: hmnews
   hoodpub
     path: hoodpub
+  news
+    path: news
 
 GRAPH
-  hmnews (0.1.0)
+  apt (3.0.0)
   hoodpub (0.1.0)
+    apt (>= 0.0.0)
+    hostsfile (>= 0.0.0)
+    java (>= 0.0.0)
+  hostsfile (2.4.5)
+  java (1.39.0)
+    apt (>= 0.0.0)
+  news (0.1.0)

@@ -1,12 +1,12 @@
 #
-# Cookbook Name:: hmnews
+# Cookbook Name:: news
 # Spec:: default
 #
 # Copyright (c) 2016 The Authors, All Rights Reserved.
 
 require 'spec_helper'
 
-describe 'hmnews::default' do
+describe 'news::default' do
   context 'When all attributes are default, on an unspecified platform' do
     let(:chef_run) do
       runner = ChefSpec::ServerRunner.new
