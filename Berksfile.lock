@@ -1,0 +1,9 @@
+DEPENDENCIES
+  hmnews
+    path: hmnews
+  hoodpub
+    path: hoodpub
+
+GRAPH
+  hmnews (0.1.0)
+  hoodpub (0.1.0)
