@@ -1,11 +1,11 @@
-upstream django {
-    server unix:/tmp/uwsgi.sock;
+upstream django-news {
+    server unix:/tmp/uwsgi-news.sock;
 }
 
 # configuration of the server
 server {
     listen      80;
-    server_name ~^(.+)$;
+    server_name news.hoodpub.com;
     charset     utf-8;
 
     client_max_body_size 75M;   # adjust to taste
@@ -19,7 +19,7 @@ server {
     # }
 
     location / {
-        uwsgi_pass  django;
+        uwsgi_pass  django-news;
         include /etc/nginx/uwsgi_params;
     }
 }

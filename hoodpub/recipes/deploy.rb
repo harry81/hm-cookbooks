@@ -20,10 +20,10 @@ bash "pip install package" do
   cwd node.hoodpub.deploy_path
   code <<-BASH
   export HOME=/home/deploy
-  if [ ! -d venv ]; then
-    virtualenv venv
+  if [ ! -d .venv-hoodpub ]; then
+    virtualenv .venv-hoodpub
   fi
-  source venv/bin/activate
+  source .venv-hoodpub/bin/activate
   pip install -r src/hoodpub/web/requirements.txt
   BASH
   action :run
@@ -34,7 +34,7 @@ bash "migrate" do
   cwd node.hoodpub.deploy_path
   code <<-BASH
   export HOME=/home/deploy
-  source venv/bin/activate
+  source .venv-hoodpub/bin/activate
   cd src/hoodpub/web
   python manage.py collectstatic --noinput
   python manage.py migrate
@@ -47,11 +47,11 @@ bash "run uwsgi" do
   cwd node.hoodpub.deploy_path
   code <<-BASH
   export HOME=/home/deploy
-  source venv/bin/activate
+  source .venv-hoodpub/bin/activate
   cd src/hoodpub/web
   kill -9 $(pidof uwsgi)
 
-  uwsgi --ini uwsgi.ini
+  uwsgi --ini uwsgi-hoodpub.ini
   BASH
   action :run
 end

@@ -83,16 +83,27 @@ end
 ENV['HOME'] = node.news.deploy_path
 ENV['JAVA_HOME'] = node.news.java_home
 
-bash "pip install package" do
-  user "deploy"
-  cwd node.news.deploy_path
-  code <<-BASH
-  export HOME=/home/deploy
-  if [ ! -d venv ]; then
-    virtualenv venv
-  fi
-  source venv/bin/activate
-  pip install -r src/news/backend/requirements.txt
-  BASH
-  action :run
+postgresql_connection_info = {
+  :host     => '127.0.0.1',
+  :port     => node['postgresql']['config']['port'],
+  :username => 'postgres',
+  :password => node['postgresql']['password']['postgres']
+}
+
+# Create a postgresql user but grant no privileges
+postgresql_database_user 'news' do
+  connection postgresql_connection_info
+  password   '1234qwer'
+  action     :create
+end
+
+# create a postgresql database with additional parameters
+postgresql_database 'news' do
+  connection postgresql_connection_info
+  template 'DEFAULT'
+  encoding 'DEFAULT'
+  tablespace 'DEFAULT'
+  connection_limit '-1'
+  owner 'hoodpub'
+  action :create
 end

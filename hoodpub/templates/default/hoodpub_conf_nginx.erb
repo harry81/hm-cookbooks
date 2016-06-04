@@ -1,5 +1,5 @@
-upstream django {
-    server unix:/tmp/uwsgi.sock;
+upstream django-hoodpub {
+    server unix:/tmp/uwsgi-hoodpub.sock;
 }
 
 server {
@@ -28,7 +28,7 @@ server {
     }
 
     location / {
-        uwsgi_pass  django;
+        uwsgi_pass  django-hoodpub;
         include /etc/nginx/uwsgi_params;
     }
 }

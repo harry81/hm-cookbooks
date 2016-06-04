@@ -22,6 +22,7 @@ package "libxslt1.1"
 package "libncurses-dev"
 package "libpq-dev"
 package "python-imaging"
+package "libxslt1-dev"
 
 include_recipe "database::postgresql"
 
@@ -66,11 +67,6 @@ bash "link nginx conf" do
   action :run
 end
 
-hostsfile_entry '127.0.0.1' do
-  hostname  'redis'
-  action    :create
-end
-
 
 ENV['HOME'] = node.hoodpub.deploy_path
 
@@ -88,7 +84,6 @@ postgresql_database_user 'hoodpub' do
   action     :create
 end
 
-
 # create a postgresql database with additional parameters
 postgresql_database 'hoodpub' do
   connection postgresql_connection_info
@@ -98,4 +93,9 @@ postgresql_database 'hoodpub' do
   connection_limit '-1'
   owner 'hoodpub'
   action :create
+end
+
+hostsfile_entry '127.0.0.1' do
+  hostname  'redis postgres'
+  action    :create
 end
