@@ -31,7 +31,7 @@ bash "run uwsgi" do
   export HOME=/home/deploy
   source .venv-news/bin/activate
   cd src/news/backend
-  uwsgi --ini uwsgi.ini
+  uwsgi --ini uwsgi-news.ini
   BASH
   action :run
 end

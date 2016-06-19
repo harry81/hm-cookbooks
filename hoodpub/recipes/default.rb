@@ -23,6 +23,7 @@ package "libncurses-dev"
 package "libpq-dev"
 package "python-imaging"
 package "libxslt1-dev"
+package "rabbitmq-server"
 
 include_recipe "database::postgresql"
 
@@ -96,6 +97,6 @@ postgresql_database 'hoodpub' do
 end
 
 hostsfile_entry '127.0.0.1' do
-  hostname  'redis postgres'
+  hostname  'redis postgres rabbitmq'
   action    :create
 end

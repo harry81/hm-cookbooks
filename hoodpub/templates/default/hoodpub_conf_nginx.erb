@@ -4,7 +4,7 @@ upstream django-hoodpub {
 
 server {
     listen      80;
-    server_name hoodpub.com  www.hoodpub.com;
+    server_name .hoodpub.com;
     return  301 https://$server_name$request_uri;
 }
 

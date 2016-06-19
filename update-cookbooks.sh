@@ -1,5 +1,8 @@
 #!/bin/bash
 
+gem install berkshelf
+gem ins hitimes -v 1.2.1 --platform ruby
+
 echo 'Packaging.'
 berks package /tmp/cookbooks-temp.tar.gz
 pushd /tmp
@@ -17,5 +20,5 @@ cd ..
 rm -rf cookbooks
 
 echo 'Moving to S3'
-aws s3 cp /tmp/hm-cookbooks.tar.gz s3://hm-cookbooks/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers
+aws s3 cp /tmp/hm-cookbooks.tar.gz s3://hm-cookbooks/ --grants read=uri=http://acs.amazonaws.com/groups/global/AllUsers --profile pointer
 popd
