@@ -49,7 +49,13 @@ bash "run uwsgi" do
   export HOME=/home/deploy
   source .venv-hoodpub/bin/activate
   cd src/hoodpub/web
-  kill -9 $(pidof uwsgi)
+
+  pids=$(ps aux | grep uwsgi | grep -i hoodpub | awk '{print $2}')
+  if [ -z pids ]; then
+    echo "no process"
+  else
+    kill -9 pids
+  fi
 
   uwsgi --ini uwsgi-hoodpub.ini
   BASH

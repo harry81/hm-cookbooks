@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/zsh
 
 gem install berkshelf
-gem install hitimes -v 1.2.1 --platform ruby
+gem ins hitimes -v 1.2.1 --platform ruby
 
 echo 'Packaging.'
 berks package /tmp/cookbooks-temp.tar.gz

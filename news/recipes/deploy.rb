@@ -24,14 +24,22 @@ bash "migrate" do
   action :run
 end
 
-bash "run uwsgi" do
+bash "run news uwsgi" do
   user "deploy"
   cwd node.news.deploy_path
   code <<-BASH
   export HOME=/home/deploy
   source .venv-news/bin/activate
   cd src/news/backend
+
+  pids=$(ps aux | grep uwsgi | grep -i news | awk '{print $2}')
+  if [ -z pids ]; then
+    echo "no process"
+  else
+    kill -9 pids
+  fi
   uwsgi --ini uwsgi-news.ini
+
   BASH
   action :run
 end
