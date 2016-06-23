@@ -96,7 +96,18 @@ postgresql_database 'hoodpub' do
   action :create
 end
 
+
 hostsfile_entry '127.0.0.1' do
-  hostname  'redis postgres rabbitmq'
-  action    :create
+  hostname  'redis'
+  action    :append
+end
+
+hostsfile_entry '127.0.0.1' do
+  hostname  'postgres'
+  action    :append
+end
+
+hostsfile_entry '127.0.0.1' do
+  hostname  'rabbitmq'
+  action    :append
 end
