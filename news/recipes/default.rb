@@ -22,6 +22,21 @@ package "libxslt1.1"
 package "libncurses-dev"
 package "libpq-dev"
 
+hostsfile_entry '127.0.0.1' do
+  hostname  'redis'
+  action    :append
+end
+
+hostsfile_entry '127.0.0.1' do
+  hostname  'postgres'
+  action    :append
+end
+
+hostsfile_entry '127.0.0.1' do
+  hostname  'rabbitmq'
+  action    :append
+end
+
 user node.news.deploy do
   comment 'news user'
   home node.news.deploy_path

@@ -61,19 +61,3 @@ bash "run uwsgi" do
   BASH
   action :run
 end
-
-
-hostsfile_entry '127.0.0.1' do
-  hostname  'redis'
-  action    :append
-end
-
-hostsfile_entry '127.0.0.1' do
-  hostname  'postgres'
-  action    :append
-end
-
-hostsfile_entry '127.0.0.1' do
-  hostname  'rabbitmq'
-  action    :append
-end
